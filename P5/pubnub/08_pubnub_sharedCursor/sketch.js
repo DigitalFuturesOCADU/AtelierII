@@ -34,7 +34,7 @@ function setup()
   });
   
   //attach callbacks to the pubnub object to handle messages and connections
-  dataServer.addListener({ message: readIncoming})
+  dataServer.addListener({ message: readIncoming });
   dataServer.subscribe({channels: [channelName]});
 
   cursors.push(new Allcursors(mouseX,mouseY,dataServer.getUUID()));

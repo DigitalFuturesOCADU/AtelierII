@@ -37,7 +37,7 @@ function setup()
   });
   
   //attach callbacks to the pubnub object to handle messages and connections
-  dataServer.addListener({ message: readIncoming, presence: whoisconnected })
+  dataServer.addListener({ message: readIncoming });
   dataServer.subscribe({channels: [channelName]});
 
 
@@ -176,7 +176,3 @@ function readIncoming(inMessage) //when new data comes in it triggers this funct
   }
 }
 
-function whoisconnected(connectionInfo)
-{
-
-}

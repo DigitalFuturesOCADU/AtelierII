@@ -1,34 +1,27 @@
 /*
- * Creation & Computation - Digital Futures, OCAD University
- * Kate Hartman / Nick Puckett
- * 
- * Basic PubNub example for sending messages to the other browser sessions that are open
- * Enter text into the textbox and hit Post Message
- * The text is sent to all open sessions, the size and location of the text is randomized for each browser locally 
+
+Blank pubnub sketch
  */
 
 // server variables
 
 var dataServer;
-var pubKey = 'pub-c-a705a585-4407-4f88-8b83-ac846c45e13a';
-var subKey = 'sub-c-64587bc8-b0cf-11e6-a7bb-0619f8945a4f';
+var pubKey = 'xxxxxxxxx';
+var subKey = 'xxxxxxxxx';
 
-//input variables
-var sendText;
-var sendButton;
 
 //size of the active area
 var cSizeX = 900;
 var cSizeY = 600;
 
 //name used to sort your messages. used like a radio station. can be called anything
-var channelName = "sayStuffRand";
+var channelName = "messageChannel";
 
 function setup() 
 {
   getAudioContext().resume();
   createCanvas(cSizeX, cSizeY);
-  
+  background(255);
   
   
 
@@ -41,16 +34,9 @@ function setup()
   });
   
   //attach callbacks to the pubnub object to handle messages and connections
-  dataServer.addListener({ message: readIncoming });
+  dataServer.addListener({ message: readIncoming});
   dataServer.subscribe({channels: [channelName]});
 
-  //create the text fields for the message to be sent
-  sendText = createInput();
-  sendText.position(5,height);
-
-  sendButton = createButton('Post Message');
-  sendButton.position(sendText.x + sendText.width,height);
-  sendButton.mousePressed(sendTheMessage);
 
 }
 
@@ -62,7 +48,7 @@ function draw()
 
 
 ///uses built in mouseClicked function to send the data to the pubnub server
-function sendTheMessage() {
+function mouseClicked() {
  
 
   // Send Data to the server to draw it in all other canvases
@@ -71,7 +57,7 @@ function sendTheMessage() {
       channel: channelName,
       message: 
       {
-        messageText: sendText.value()       //get the value from the text box and send it as part of the message   
+        messageText: "testText"       //get the value from the text box and send it as part of the message   
       }
     });
 
@@ -83,10 +69,8 @@ function readIncoming(inMessage) //when new data comes in it triggers this funct
   // simple error check to match the incoming to the channelName
   if(inMessage.channel == channelName)
   {
-    noStroke();
-    fill(random(0,255),random(0,255),random(0,255));  //read the color values from the message
-    textSize(random(10,50))
-    text(inMessage.message.messageText, random(0,width-20), random(10,height));
+
+    console.log(inMessage.message.messageText);
   }
 }
 
