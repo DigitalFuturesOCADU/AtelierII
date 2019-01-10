@@ -17,7 +17,7 @@ var subKey = 'sub-c-64587bc8-b0cf-11e6-a7bb-0619f8945a4f';
 var sendText;
 var whoAreYou;
 var sendButton;
-var filterText;
+
 
 //size of the active area
 var cSizeX = 900;
